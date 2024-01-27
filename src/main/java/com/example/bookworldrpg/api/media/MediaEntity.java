@@ -15,10 +15,10 @@ public class MediaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "genre")
+    @Column(name = "GENRE")
     @Enumerated(EnumType.STRING)
     private GenreEnum genre;
 
