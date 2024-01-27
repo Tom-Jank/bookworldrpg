@@ -30,6 +30,8 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.mockito:mockito-core:5.10.0")
+	runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

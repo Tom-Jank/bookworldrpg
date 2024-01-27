@@ -1,8 +1,14 @@
 package com.example.bookworldrpg.api.media;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @MappedSuperclass
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MediaEntity {
 
     @Id
