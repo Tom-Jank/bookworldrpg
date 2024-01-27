@@ -1,5 +1,5 @@
 package com.example.bookworldrpg.api.media;
 
 public enum GenreEnum {
-    FANTASY, SLICE_OF_LIFE, ROMANCE, ACTION, HORROR
+    FANTASY, SLICE_OF_LIFE, ROMANCE, ACTION
 }
