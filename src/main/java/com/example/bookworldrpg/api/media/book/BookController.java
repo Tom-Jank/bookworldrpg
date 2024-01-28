@@ -17,6 +17,7 @@ public class BookController {
     BookController(BookServiceImpl bookService) {
         this.bookService = bookService;
     }
+
     @GetMapping
     List<BookEntity> getAllBooks() {
        return bookService.findAllBooks();
