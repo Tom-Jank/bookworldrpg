@@ -1,9 +1,10 @@
 package com.example.bookworldrpg.api.media.book;
 
-import com.example.bookworldrpg.api.media_management.entity.GenreEnum;
 import com.example.bookworldrpg.api.media_management.book_management.BookRepository;
 import com.example.bookworldrpg.api.media_management.book_management.BookServiceImpl;
+import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
+import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,11 +30,13 @@ public class BookServiceTest {
     @Test
     public void shouldFindAllBooks() {
         // Given
+        GenreEntity genre = GenreEntity.builder().id(1L).name("genre").build();
+        AuthorEntity author = AuthorEntity.builder().id(1L).name("author").build();
         BookEntity bookEntity = BookEntity.builder()
                 .id(1L)
                 .title("Title")
-                .author("Author")
-                .genre(GenreEnum.ACTION)
+                .author(author)
+                .genre(genre)
                 .build();
         List<BookEntity> entities = new ArrayList<>();
         entities.add(bookEntity);

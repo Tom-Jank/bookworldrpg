@@ -1,7 +1,6 @@
 package com.example.bookworldrpg.api.media_management.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BookEntity extends MediaEntity {
 
-    @Column(name = "AUTHOR")
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "AUTHOR")
+    private AuthorEntity author;
 
     @Builder
-    BookEntity(Long id, String title, GenreEnum genre, String author) {
+    BookEntity(Long id, String title, GenreEntity genre, AuthorEntity author) {
         super(id, title, genre);
         this.author = author;
     }

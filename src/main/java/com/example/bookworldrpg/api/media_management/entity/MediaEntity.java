@@ -18,8 +18,8 @@ public class MediaEntity {
     @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "GENRE")
-    @Enumerated(EnumType.STRING)
-    private GenreEnum genre;
+    @JoinColumn(name = "GENRE")
+    @OneToOne
+    private GenreEntity genre;
 
 }

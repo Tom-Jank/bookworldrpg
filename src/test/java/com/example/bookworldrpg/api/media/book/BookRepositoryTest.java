@@ -1,8 +1,9 @@
 package com.example.bookworldrpg.api.media.book;
 
-import com.example.bookworldrpg.api.media_management.entity.GenreEnum;
 import com.example.bookworldrpg.api.media_management.book_management.BookRepository;
+import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
+import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -25,17 +26,19 @@ public class BookRepositoryTest {
     @Test
     public void shouldFetchAllBooks() {
         // Given
+        GenreEntity genre = GenreEntity.builder().id(1L).name("genre").build();
+        AuthorEntity author = AuthorEntity.builder().id(1L).name("author").build();
         BookEntity bookEntity1 = BookEntity.builder()
                 .id(1L)
                 .title("Book1")
-                .author("Author")
-                .genre(GenreEnum.ACTION)
+                .author(author)
+                .genre(genre)
                 .build();
         BookEntity bookEntity2 = BookEntity.builder()
                 .id(2L)
                 .title("Book2")
-                .author("Author")
-                .genre(GenreEnum.ROMANCE)
+                .author(author)
+                .genre(genre)
                 .build();
 
         bookRepository.save(bookEntity1);

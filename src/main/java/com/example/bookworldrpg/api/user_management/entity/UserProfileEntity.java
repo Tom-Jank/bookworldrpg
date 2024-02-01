@@ -19,10 +19,7 @@ public class UserProfileEntity {
     @Column(name = "EXPERIENCE")
     private Long experience;
 
-    @Column(name = "LEVEL")
+    @Column(name = "USER_LEVEL")
     private Long level;
 
-    // TODO change to ProfessionEnum later -> User gets it by profiling based on title genres
-    @Column(name = "PROFESSION")
-    private String profession;
 }
