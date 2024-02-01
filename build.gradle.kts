@@ -32,6 +32,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.mockito:mockito-core:5.10.0")
 	runtimeOnly("com.h2database:h2")
+	implementation("org.modelmapper:modelmapper:3.2.0")
 }
 
 tasks.withType<Test> {

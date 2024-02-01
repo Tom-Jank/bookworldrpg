@@ -1,4 +1,4 @@
-package com.example.bookworldrpg.api.user.personal;
+package com.example.bookworldrpg.api.user_management;
 
 import org.springframework.web.bind.annotation.RestController;
 
