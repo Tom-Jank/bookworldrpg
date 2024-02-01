@@ -1,14 +1,10 @@
 package com.example.bookworldrpg.api.media.book;
 
-import com.example.bookworldrpg.BookworldrpgApplication;
-import com.example.bookworldrpg.api.media.GenreEnum;
-import com.example.bookworldrpg.api.media.book.BookEntity;
-import com.example.bookworldrpg.api.media.book.BookRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import com.example.bookworldrpg.api.media_management.entity.GenreEnum;
+import com.example.bookworldrpg.api.media_management.book_management.BookRepository;
+import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.bookworldrpg.api.media;
+package com.example.bookworldrpg.api.media_management.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
