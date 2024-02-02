@@ -1,7 +1,7 @@
 package com.example.bookworldrpg.api.media.book;
 
-import com.example.bookworldrpg.api.media_management.book_management.BookRepository;
-import com.example.bookworldrpg.api.media_management.book_management.BookServiceImpl;
+import com.example.bookworldrpg.api.media_management.book_management.book.BookRepository;
+import com.example.bookworldrpg.api.media_management.book_management.book.BookServiceImpl;
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;

@@ -1,4 +1,4 @@
-package com.example.bookworldrpg.api.media_management.book_management;
+package com.example.bookworldrpg.api.media_management.book_management.book;
 
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
