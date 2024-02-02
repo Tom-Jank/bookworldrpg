@@ -1,16 +1,17 @@
 package com.example.bookworldrpg.api.media_management.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Entity(name = "AUTHOR")
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class AuthorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME")

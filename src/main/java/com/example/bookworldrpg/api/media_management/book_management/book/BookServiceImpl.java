@@ -36,17 +36,12 @@ public class BookServiceImpl implements BookService {
         String genreName = requestedBook.getGenre();
         String authorName = requestedBook.getAuthor();
 
-        Optional<GenreEntity> genreEntity = genreRepository.findGenreByName(genreName);
-        Optional<AuthorEntity> authorEntity = authorRepository.findAuthorByName(authorName);
+        GenreEntity genreEntity = genreRepository.findGenreByName(genreName).orElseGet(() -> genreRepository.save(GenreEntity.builder().name(genreName).build()));
+        AuthorEntity authorEntity = authorRepository.findAuthorByName(authorName).orElseGet(() -> authorRepository.save(AuthorEntity.builder().name(authorName).build()));
 
-        genreEntity.ifPresentOrElse(
-                (genre) -> { System.out.println(genre);},
-                () -> { genreRepository.save(GenreEntity.builder().name(genreName).build()); }
-        );
+        BookEntity bookEntity = BookEntity.builder().title(requestedBook.getTitle()).author(authorEntity).genre(genreEntity).build();
 
-        authorEntity.ifPresentOrElse(
-                (author) -> { System.out.println(author);},
-                () -> { authorRepository.save(AuthorEntity.builder().name(authorName).build()); }
-        );
+        System.out.println("Debugger stop");
+        return bookRepository.save(bookEntity);
     }
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class BookEntity extends MediaEntity {
 
     @ManyToOne
-    @JoinColumn(name = "AUTHOR")
+    @JoinColumn(name = "AUTHOR_ID")
     private AuthorEntity author;
 
     @Builder

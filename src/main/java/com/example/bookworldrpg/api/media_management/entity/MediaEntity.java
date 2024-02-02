@@ -18,7 +18,7 @@ public class MediaEntity {
     @Column(name = "TITLE")
     private String title;
 
-    @JoinColumn(name = "GENRE")
+    @JoinColumn(name = "GENRE_ID")
     @OneToOne
     private GenreEntity genre;
 
