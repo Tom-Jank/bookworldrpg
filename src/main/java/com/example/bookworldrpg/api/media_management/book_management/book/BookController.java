@@ -15,12 +15,9 @@ public class BookController {
 
     private final BookService bookService;
 
-    private final ModelMapper modelMapper;
-
     @Autowired
-    BookController(BookServiceImpl bookService, ModelMapper modelMapper) {
+    BookController(BookServiceImpl bookService) {
         this.bookService = bookService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -30,8 +27,8 @@ public class BookController {
 
     @PostMapping
     @ResponseBody
-    BookEntity addNewBook(@RequestBody BookRequestDto bookRequest) {
-        BookEntity savedBook = bookService.addNewBook(bookRequest);
+    BookResponseDto addNewBook(@RequestBody BookRequestDto bookRequest) {
+        BookResponseDto savedBook = bookService.addNewBook(bookRequest);
         return savedBook;
     }
 }

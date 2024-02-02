@@ -1,10 +1,11 @@
 package com.example.bookworldrpg.api.media_management.dto;
 
-import lombok.Value;
+import lombok.*;
 
 @Value
+@Builder
 public class BookResponseDto {
     private final String title;
-    private final AuthorDto author;
-    private final GenreDto genre;
+    private final String author;
+    private final String genre;
 }

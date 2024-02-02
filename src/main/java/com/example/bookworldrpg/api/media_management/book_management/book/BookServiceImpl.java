@@ -3,9 +3,11 @@ package com.example.bookworldrpg.api.media_management.book_management.book;
 import com.example.bookworldrpg.api.media_management.book_management.author.AuthorRepository;
 import com.example.bookworldrpg.api.media_management.book_management.genre.GenreRepository;
 import com.example.bookworldrpg.api.media_management.dto.BookRequestDto;
+import com.example.bookworldrpg.api.media_management.dto.BookResponseDto;
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
+import com.example.bookworldrpg.common.util.mappers.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,19 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     private final GenreRepository genreRepository;
+    private final BookMapper bookMapper;
 
     @Autowired
-    BookServiceImpl(BookRepository bookRepository, GenreRepository genreRepository, AuthorRepository authorRepository) {
+    BookServiceImpl(
+           BookRepository bookRepository,
+           GenreRepository genreRepository,
+           AuthorRepository authorRepository,
+           BookMapper bookMapper
+    ) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.genreRepository = genreRepository;
+        this.bookMapper = bookMapper;
     }
 
     @Override
@@ -32,16 +41,34 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookEntity addNewBook(BookRequestDto requestedBook) {
-        String genreName = requestedBook.getGenre();
-        String authorName = requestedBook.getAuthor();
+    public BookResponseDto addNewBook(BookRequestDto requestedBook) {
+        GenreEntity genreEntity = findGenreOrCreateNew(requestedBook);
+        AuthorEntity authorEntity = findAuthorOrCreateNew(requestedBook);
 
-        GenreEntity genreEntity = genreRepository.findGenreByName(genreName).orElseGet(() -> genreRepository.save(GenreEntity.builder().name(genreName).build()));
-        AuthorEntity authorEntity = authorRepository.findAuthorByName(authorName).orElseGet(() -> authorRepository.save(AuthorEntity.builder().name(authorName).build()));
+        BookEntity bookToCreate = BookEntity.builder()
+                .title(requestedBook.getTitle())
+                .author(authorEntity)
+                .genre(genreEntity)
+                .build();
 
-        BookEntity bookEntity = BookEntity.builder().title(requestedBook.getTitle()).author(authorEntity).genre(genreEntity).build();
+        BookEntity savedBook = bookRepository.save(bookToCreate);
+        return BookMapper.toBookResponseDto(savedBook);
+    }
 
-        System.out.println("Debugger stop");
-        return bookRepository.save(bookEntity);
+    // validate to check if new entry doesn't break constraints
+    private Boolean checkIfThisBookAlreadyExists(String title, Long author, Long genre) {
+        return true;
+    }
+
+    private GenreEntity findGenreOrCreateNew(BookRequestDto bookRequestDto) {
+        String genreName = bookRequestDto.getGenre();
+        return genreRepository.findGenreByName(genreName)
+                .orElseGet(() -> genreRepository.save(GenreEntity.builder().name(genreName).build()));
+    }
+
+    private AuthorEntity findAuthorOrCreateNew(BookRequestDto bookRequestDto) {
+        String authorName = bookRequestDto.getAuthor();
+        return authorRepository.findAuthorByName(authorName)
+                .orElseGet(() -> authorRepository.save(AuthorEntity.builder().name(authorName).build()));
     }
 }
