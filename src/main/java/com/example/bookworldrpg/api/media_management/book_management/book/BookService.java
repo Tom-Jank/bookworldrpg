@@ -9,5 +9,5 @@ import java.util.List;
 public interface BookService {
     List<BookEntity> findAllBooks();
 
-    BookResponseDto addNewBook(BookRequestDto bookEntity);
+    BookEntity addNewBook(BookRequestDto bookEntity);
 }

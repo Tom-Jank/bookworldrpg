@@ -4,8 +4,6 @@ import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
@@ -17,7 +15,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Optional<AuthorEntity> findAuthorByName(String name) {
-        return this.authorRepository.findAuthorByName(name);
+    public AuthorEntity findAuthorByNameOrCreateNew(String name) {
+        return authorRepository.findAuthorByName(name)
+                .orElseGet(() -> authorRepository.save(AuthorEntity.builder().name(name).build()));
     }
 }
