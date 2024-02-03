@@ -7,12 +7,13 @@ import com.example.bookworldrpg.api.media_management.dto.BookResponseDto;
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
+import com.example.bookworldrpg.common.util.exceptions.BusinessException;
+import com.example.bookworldrpg.common.util.exceptions.BusinessExceptionCode;
 import com.example.bookworldrpg.common.util.mappers.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -20,19 +21,16 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     private final GenreRepository genreRepository;
-    private final BookMapper bookMapper;
 
     @Autowired
     BookServiceImpl(
            BookRepository bookRepository,
            GenreRepository genreRepository,
-           AuthorRepository authorRepository,
-           BookMapper bookMapper
+           AuthorRepository authorRepository
     ) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.genreRepository = genreRepository;
-        this.bookMapper = bookMapper;
     }
 
     @Override
@@ -51,13 +49,18 @@ public class BookServiceImpl implements BookService {
                 .genre(genreEntity)
                 .build();
 
+        if ( theBookAlreadyExist(bookToCreate) ) throw new BusinessException(BusinessExceptionCode.B_01);
+
         BookEntity savedBook = bookRepository.save(bookToCreate);
         return BookMapper.toBookResponseDto(savedBook);
     }
 
-    // validate to check if new entry doesn't break constraints
-    private Boolean checkIfThisBookAlreadyExists(String title, Long author, Long genre) {
-        return true;
+    private Boolean theBookAlreadyExist(BookEntity bookToCheck) {
+        return bookRepository.findByTitleAndGenreIdAndAuthorId(
+                bookToCheck.getTitle(),
+                bookToCheck.getGenre().getId(),
+                bookToCheck.getAuthor().getId())
+                .isPresent();
     }
 
     private GenreEntity findGenreOrCreateNew(BookRequestDto bookRequestDto) {

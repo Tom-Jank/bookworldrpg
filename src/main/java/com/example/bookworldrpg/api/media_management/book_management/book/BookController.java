@@ -5,6 +5,8 @@ import com.example.bookworldrpg.api.media_management.dto.BookResponseDto;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +29,7 @@ public class BookController {
 
     @PostMapping
     @ResponseBody
-    BookResponseDto addNewBook(@RequestBody BookRequestDto bookRequest) {
-        BookResponseDto savedBook = bookService.addNewBook(bookRequest);
-        return savedBook;
+    ResponseEntity<BookResponseDto> addNewBook(@RequestBody BookRequestDto bookRequest) {
+        return new ResponseEntity<>(bookService.addNewBook(bookRequest), HttpStatus.OK);
     }
 }
