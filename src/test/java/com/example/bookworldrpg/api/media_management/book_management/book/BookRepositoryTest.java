@@ -1,4 +1,4 @@
-package com.example.bookworldrpg.api.media_management.book_management;
+package com.example.bookworldrpg.api.media_management.book_management.book;
 
 import com.example.bookworldrpg.api.media_management.book_management.author.AuthorRepository;
 import com.example.bookworldrpg.api.media_management.book_management.book.BookRepository;
@@ -9,46 +9,44 @@ import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 @DataJpaTest
 public class BookRepositoryTest {
 
+    private final TestEntityManager testEntityManager;
     private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
-    private final GenreRepository genreRepository;
 
     @Autowired
     BookRepositoryTest(
             BookRepository bookRepository,
-            AuthorRepository authorRepository,
-            GenreRepository genreRepository
+            TestEntityManager testEntityManager
     ) {
         this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
-        this.genreRepository = genreRepository;
+        this.testEntityManager = testEntityManager;
     }
 
     @Test
     public void shouldFindTitleByUniqueConstraint() {
         // Given
-        GenreEntity genre = GenreEntity.builder().id(1L).name("genre").build();
-        AuthorEntity author = AuthorEntity.builder().id(1L).name("author").build();
-        BookEntity bookEntity = BookEntity.builder()
-                .id(1L)
+        GenreEntity genre = GenreEntity.builder().name("genre").build();
+        AuthorEntity author = AuthorEntity.builder().name("author").build();
+        BookEntity book = BookEntity.builder()
                 .title("Book1")
                 .author(author)
                 .genre(genre)
                 .build();
-        genreRepository.save(genre);
-        authorRepository.save(author);
-        bookRepository.save(bookEntity);
+        testEntityManager.persistAndFlush(author);
+        testEntityManager.persistAndFlush(genre);
+        testEntityManager.persistAndFlush(book);
 
         // When
-        Optional<BookEntity> result = bookRepository.findByTitleAndGenreIdAndAuthorId(bookEntity.getTitle(), genre.getId(), author.getId());
+        Optional<BookEntity> result = bookRepository.findByTitleAndGenreIdAndAuthorId(book.getTitle(), genre.getId(), author.getId());
 
         // Then
         assertTrue(result.isPresent());
