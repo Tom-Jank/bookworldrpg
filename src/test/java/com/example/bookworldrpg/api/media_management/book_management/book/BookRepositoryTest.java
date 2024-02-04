@@ -1,8 +1,5 @@
 package com.example.bookworldrpg.api.media_management.book_management.book;
 
-import com.example.bookworldrpg.api.media_management.book_management.author.AuthorRepository;
-import com.example.bookworldrpg.api.media_management.book_management.book.BookRepository;
-import com.example.bookworldrpg.api.media_management.book_management.genre.GenreRepository;
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
@@ -14,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
 
 @DataJpaTest
 public class BookRepositoryTest {
