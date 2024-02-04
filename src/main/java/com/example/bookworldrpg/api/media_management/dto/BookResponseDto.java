@@ -1,6 +1,7 @@
 package com.example.bookworldrpg.api.media_management.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
 
 @Value
 @Builder

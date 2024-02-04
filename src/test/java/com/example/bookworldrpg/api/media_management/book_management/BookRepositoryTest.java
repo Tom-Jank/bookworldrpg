@@ -6,15 +6,13 @@ import com.example.bookworldrpg.api.media_management.book_management.genre.Genre
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 public class BookRepositoryTest {

@@ -4,7 +4,6 @@ import com.example.bookworldrpg.api.media_management.dto.BookRequestDto;
 import com.example.bookworldrpg.api.media_management.dto.BookResponseDto;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.common.util.mappers.BookMapper;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
