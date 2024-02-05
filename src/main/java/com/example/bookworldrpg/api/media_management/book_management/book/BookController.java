@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/book")
@@ -24,14 +25,19 @@ public class BookController {
     }
 
     @GetMapping
-    List<BookEntity> getPagedBooks(@RequestBody BookPageSortRequest request) {
-       return bookService.findPaged(request);
+    List<BookResponseDto> getPagedBooks(@RequestBody BookPageSortRequest request) {
+       return bookService
+               .findPaged(request)
+               .stream()
+               .map(BookMapper::toBookResponseDto)
+               .collect(Collectors.toList());
    }
 
     @PostMapping
     @ResponseBody
     ResponseEntity<BookResponseDto> addNewBook(@RequestBody BookRequestDto bookRequest) {
-        BookResponseDto responseDto = BookMapper.toBookResponseDto(bookService.addNewBook(bookRequest));
+        BookResponseDto responseDto = BookMapper
+                .toBookResponseDto(bookService.addNewBook(bookRequest));
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }

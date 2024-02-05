@@ -44,10 +44,9 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(bookToCreate);
     }
 
-    // fixme Need to check this pageable better tomorrow cause it seems fishy
     @Override
     public List<BookEntity> findPaged(BookPageSortRequest request) {
-        Pageable paged = PageRequest.of(request.firstElement(), request.lastElement());
+        Pageable paged = PageRequest.of(request.page(), request.numberOfElements());
         return bookRepository.findAll(paged).stream().collect(Collectors.toList());
     }
 
