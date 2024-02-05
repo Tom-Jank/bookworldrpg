@@ -4,6 +4,7 @@ import com.example.bookworldrpg.api.media_management.book_management.author.Auth
 import com.example.bookworldrpg.api.media_management.book_management.author.AuthorServiceImpl;
 import com.example.bookworldrpg.api.media_management.book_management.genre.GenreService;
 import com.example.bookworldrpg.api.media_management.book_management.genre.GenreServiceImpl;
+import com.example.bookworldrpg.api.media_management.dto.BookPageSortRequest;
 import com.example.bookworldrpg.api.media_management.dto.BookRequestDto;
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
@@ -11,9 +12,12 @@ import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
 import com.example.bookworldrpg.common.util.exceptions.BusinessException;
 import com.example.bookworldrpg.common.util.exceptions.BusinessExceptionCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -34,15 +38,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookEntity> findAllBooks() {
-       return bookRepository.findAll();
-    }
-
-    @Override
     public BookEntity addNewBook(BookRequestDto requestedBook) {
         BookEntity bookToCreate = prepareBookTooCreate(requestedBook);
         if ( theBookAlreadyExist(bookToCreate) ) throw new BusinessException(BusinessExceptionCode.B_01);
         return bookRepository.save(bookToCreate);
+    }
+
+    // fixme Need to check this pageable better tomorrow cause it seems fishy
+    @Override
+    public List<BookEntity> findPaged(BookPageSortRequest request) {
+        Pageable paged = PageRequest.of(request.firstElement(), request.lastElement());
+        return bookRepository.findAll(paged).stream().collect(Collectors.toList());
     }
 
     private BookEntity prepareBookTooCreate(BookRequestDto requestedBook) {
