@@ -25,19 +25,26 @@ public class BookController {
     }
 
     @GetMapping
-    List<BookResponseDto> getPagedBooks(@RequestBody BookPageSortRequest request) {
-       return bookService
-               .findPaged(request)
-               .stream()
-               .map(BookMapper::toBookResponseDto)
-               .collect(Collectors.toList());
-   }
+    ResponseEntity<List<BookResponseDto>> getPagedBooks(
+            @RequestBody BookPageSortRequest request) {
+        List<BookResponseDto> responseDtos =
+                bookService
+                        .findPaged(request)
+                        .stream()
+                        .map(BookMapper::toBookResponseDto)
+                        .toList();
+
+        return new ResponseEntity<>(responseDtos, HttpStatus.OK);
+    }
 
     @PostMapping
     @ResponseBody
-    ResponseEntity<BookResponseDto> addNewBook(@RequestBody BookRequestDto bookRequest) {
-        BookResponseDto responseDto = BookMapper
-                .toBookResponseDto(bookService.addNewBook(bookRequest));
+    ResponseEntity<BookResponseDto> addNewBook(
+            @RequestBody BookRequestDto bookRequest
+    ) {
+        BookResponseDto responseDto =
+                BookMapper.toBookResponseDto(bookService.addNewBook(bookRequest));
+
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
