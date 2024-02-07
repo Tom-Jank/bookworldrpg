@@ -5,5 +5,5 @@ import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import java.util.List;
 
 public interface UserBookLibraryService {
-    List<BookEntity> findUserBookLibraryCompositeIds(Long userId);
+    List<BookEntity> findBooksFromUserLibrary(Long userId);
 }

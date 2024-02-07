@@ -13,15 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("api/user-lib")
 public class UserBookLibraryController {
-    private final UserBookLibraryService userBookLibraryService;
+    private final UserBookLibraryServiceImpl userBookLibraryService;
 
     @Autowired
-    UserBookLibraryController(UserBookLibraryService userBookLibraryService) {
+    UserBookLibraryController(UserBookLibraryServiceImpl userBookLibraryService) {
         this.userBookLibraryService = userBookLibraryService;
     }
 
+    // TODO after auth is added remove request body
     @GetMapping
     public List<BookEntity> getUserLibrary(@RequestBody Long id) {
-        return userBookLibraryService.findUserBookLibraryCompositeIds(id);
+        return userBookLibraryService.findBooksFromUserLibrary(id);
     }
 }
