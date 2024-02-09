@@ -16,7 +16,9 @@ public class UserBookLibraryController {
     private final UserBookLibraryServiceImpl userBookLibraryService;
 
     @Autowired
-    UserBookLibraryController(UserBookLibraryServiceImpl userBookLibraryService) {
+    UserBookLibraryController(
+            UserBookLibraryServiceImpl userBookLibraryService
+    ) {
         this.userBookLibraryService = userBookLibraryService;
     }
 
