@@ -8,7 +8,7 @@ import lombok.Getter;
 @Entity
 @IdClass(UserBookLibraryId.class)
 @Getter
-public class UserBookLibraryEntity {
+public class UserBookLibrary {
     @Id Long userId;
     @Id Long bookId;
 }

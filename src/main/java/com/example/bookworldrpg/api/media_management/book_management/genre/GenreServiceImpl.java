@@ -10,7 +10,9 @@ public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
 
     @Autowired
-    GenreServiceImpl(GenreRepository genreRepository) {
+    GenreServiceImpl(
+            GenreRepository genreRepository
+    ) {
         this.genreRepository = genreRepository;
     }
 

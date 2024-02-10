@@ -10,7 +10,9 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
 
     @Autowired
-    AuthorServiceImpl(AuthorRepository authorRepository) {
+    AuthorServiceImpl(
+            AuthorRepository authorRepository
+    ) {
         this.authorRepository = authorRepository;
     }
 
