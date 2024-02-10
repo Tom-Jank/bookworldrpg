@@ -6,9 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum BusinessExceptionCode {
+  B_01("B-01", "Could not add new book. This book already exists!");
 
-    B_01("B-01", "Could not add new book. This book already exists!");
-
-    private final String code;
-    private final String message;
+  private final String code;
+  private final String message;
 }

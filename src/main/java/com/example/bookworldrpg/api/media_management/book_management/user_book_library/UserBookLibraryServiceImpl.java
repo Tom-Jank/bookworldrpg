@@ -10,18 +10,22 @@ import java.util.List;
 @Service
 public class UserBookLibraryServiceImpl implements UserBookLibraryService {
 
-    private final UserBookLibraryRepository userBookLibraryRepository;
-    private final BookRepository bookRepository;
+  private final UserBookLibraryRepository userBookLibraryRepository;
+  private final BookRepository bookRepository;
 
-    UserBookLibraryServiceImpl(UserBookLibraryRepository userBookLibraryRepository, BookRepository bookRepository) {
-        this.userBookLibraryRepository = userBookLibraryRepository;
-        this.bookRepository = bookRepository;
-    }
+  UserBookLibraryServiceImpl(
+      UserBookLibraryRepository userBookLibraryRepository, BookRepository bookRepository) {
+    this.userBookLibraryRepository = userBookLibraryRepository;
+    this.bookRepository = bookRepository;
+  }
 
-    @Override
-    public List<BookEntity> findBooksFromUserLibrary(Long userId) {
-        List<Long> bookIds = userBookLibraryRepository.findAllByUserId(userId).stream().map(UserBookLibrary::getBookId).toList();
+  @Override
+  public List<BookEntity> findBooksFromUserLibrary(Long userId) {
+    List<Long> bookIds =
+        userBookLibraryRepository.findAllByUserId(userId).stream()
+            .map(UserBookLibrary::getBookId)
+            .toList();
 
-        return bookRepository.findByIdIn(bookIds);
-    }
+    return bookRepository.findByIdIn(bookIds);
+  }
 }

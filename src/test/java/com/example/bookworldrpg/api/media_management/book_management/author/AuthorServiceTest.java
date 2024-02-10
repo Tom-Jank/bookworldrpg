@@ -17,42 +17,40 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class AuthorServiceTest {
 
-    @InjectMocks
-    AuthorServiceImpl authorService;
+  @InjectMocks AuthorServiceImpl authorService;
 
-    @Mock
-    AuthorRepository authorRepository;
+  @Mock AuthorRepository authorRepository;
 
-    @Test
-    public void shouldReturnAuthorWhenAuthorExists() {
-        // Given
-        AuthorEntity author = AuthorEntity.builder().id(1L).name("Author").build();
-        when(authorRepository.findAuthorByName(author.getName())).thenReturn(Optional.of(author));
+  @Test
+  public void shouldReturnAuthorWhenAuthorExists() {
+    // Given
+    AuthorEntity author = AuthorEntity.builder().id(1L).name("Author").build();
+    when(authorRepository.findAuthorByName(author.getName())).thenReturn(Optional.of(author));
 
-        // When
-        AuthorEntity result = authorService.findAuthorByNameOrCreateNew("Author");
+    // When
+    AuthorEntity result = authorService.findAuthorByNameOrCreateNew("Author");
 
-        // Then
-        assertNotNull(result);
-        assertEquals(author.getId(), result.getId());
-        assertEquals(author.getName(), result.getName());
-        verify(authorRepository, times(0)).save(any());
-    }
+    // Then
+    assertNotNull(result);
+    assertEquals(author.getId(), result.getId());
+    assertEquals(author.getName(), result.getName());
+    verify(authorRepository, times(0)).save(any());
+  }
 
-    @Test
-    public void shouldCreateAndReturnAuthorWhenAuthorExists() {
-        // Given
-        AuthorEntity author = AuthorEntity.builder().id(1L).name("Author").build();
-        when(authorRepository.findAuthorByName(author.getName())).thenReturn(Optional.empty());
-        when(authorRepository.save(any())).thenReturn(author);
+  @Test
+  public void shouldCreateAndReturnAuthorWhenAuthorExists() {
+    // Given
+    AuthorEntity author = AuthorEntity.builder().id(1L).name("Author").build();
+    when(authorRepository.findAuthorByName(author.getName())).thenReturn(Optional.empty());
+    when(authorRepository.save(any())).thenReturn(author);
 
-        // When
-        AuthorEntity result = authorService.findAuthorByNameOrCreateNew("Author");
+    // When
+    AuthorEntity result = authorService.findAuthorByNameOrCreateNew("Author");
 
-        // Then
-        assertNotNull(result);
-        assertEquals(author.getId(), result.getId());
-        assertEquals(author.getName(), result.getName());
-        verify(authorRepository, times(1)).save(any());
-    }
+    // Then
+    assertNotNull(result);
+    assertEquals(author.getId(), result.getId());
+    assertEquals(author.getName(), result.getName());
+    verify(authorRepository, times(1)).save(any());
+  }
 }

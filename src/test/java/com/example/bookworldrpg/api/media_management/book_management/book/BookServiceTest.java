@@ -1,5 +1,10 @@
 package com.example.bookworldrpg.api.media_management.book_management.book;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import com.example.bookworldrpg.api.media_management.book_management.author.AuthorServiceImpl;
 import com.example.bookworldrpg.api.media_management.book_management.genre.GenreServiceImpl;
 import com.example.bookworldrpg.api.media_management.dto.BookDto;
@@ -7,19 +12,13 @@ import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
 import com.example.bookworldrpg.common.util.exceptions.BusinessException;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 @ExtendWith({MockitoExtension.class})
 public class BookServiceTest {

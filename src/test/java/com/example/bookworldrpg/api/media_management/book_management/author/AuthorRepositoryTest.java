@@ -14,38 +14,35 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DataJpaTest
 public class AuthorRepositoryTest {
 
-    private final AuthorRepository authorRepository;
-    private final TestEntityManager testEntityManager;
+  private final AuthorRepository authorRepository;
+  private final TestEntityManager testEntityManager;
 
-    @Autowired
-    AuthorRepositoryTest(
-            AuthorRepository authorRepository,
-            TestEntityManager testEntityManager
-    ) {
-        this.authorRepository = authorRepository;
-        this.testEntityManager = testEntityManager;
-    }
+  @Autowired
+  AuthorRepositoryTest(AuthorRepository authorRepository, TestEntityManager testEntityManager) {
+    this.authorRepository = authorRepository;
+    this.testEntityManager = testEntityManager;
+  }
 
-    @Test
-    public void shouldFindAuthorByName() {
-        // Given
-        AuthorEntity author = AuthorEntity.builder().name("Author").build();
-        testEntityManager.persistAndFlush(author);
+  @Test
+  public void shouldFindAuthorByName() {
+    // Given
+    AuthorEntity author = AuthorEntity.builder().name("Author").build();
+    testEntityManager.persistAndFlush(author);
 
-        // When
-        Optional<AuthorEntity> result = authorRepository.findAuthorByName("Author");
+    // When
+    Optional<AuthorEntity> result = authorRepository.findAuthorByName("Author");
 
-        // Then
-        assertTrue(result.isPresent());
-        assertEquals(author.getName(), result.get().getName());
-    }
+    // Then
+    assertTrue(result.isPresent());
+    assertEquals(author.getName(), result.get().getName());
+  }
 
-    @Test
-    public void shouldNotFindAuthorByName() {
-        // Given/When
-        Optional<AuthorEntity> result = authorRepository.findAuthorByName("Author");
+  @Test
+  public void shouldNotFindAuthorByName() {
+    // Given/When
+    Optional<AuthorEntity> result = authorRepository.findAuthorByName("Author");
 
-        // Then
-        assertTrue(result.isEmpty());
-    }
+    // Then
+    assertTrue(result.isEmpty());
+  }
 }

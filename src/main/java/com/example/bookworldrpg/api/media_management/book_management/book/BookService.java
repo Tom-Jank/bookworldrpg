@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface BookService {
 
-    BookEntity addNewBook(BookDto bookEntity);
+  BookEntity addNewBook(BookDto bookEntity);
 
-    List<BookEntity> findPaged(BookPageSortRequest pageable);
-
+  List<BookEntity> findPaged(BookPageSortRequest pageable);
 }
