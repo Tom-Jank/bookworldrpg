@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class GenreServiceImpl implements GenreService {
 
-  private final GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
-  @Autowired
-  GenreServiceImpl(GenreRepository genreRepository) {
-    this.genreRepository = genreRepository;
-  }
+    @Autowired
+    GenreServiceImpl(GenreRepository genreRepository) {
+        this.genreRepository = genreRepository;
+    }
 
-  @Override
-  public GenreEntity findGenreByNameOrCreateNew(String name) {
-    return this.genreRepository
-        .findGenreByName(name)
-        .orElseGet(() -> genreRepository.save(GenreEntity.builder().name(name).build()));
-  }
+    @Override
+    public GenreEntity findGenreByNameOrCreateNew(String name) {
+        return this.genreRepository
+                .findGenreByName(name)
+                .orElseGet(() ->
+                        genreRepository.save(GenreEntity.builder().name(name).build()));
+    }
 }

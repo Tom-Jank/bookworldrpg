@@ -21,49 +21,47 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookServiceImpl implements BookService {
 
-  private final BookRepository bookRepository;
-  private final AuthorService authorService;
-  private final GenreService genreService;
+    private final BookRepository bookRepository;
+    private final AuthorService authorService;
+    private final GenreService genreService;
 
-  @Autowired
-  BookServiceImpl(
-      BookRepository bookRepository,
-      GenreServiceImpl genreService,
-      AuthorServiceImpl authorService) {
-    this.bookRepository = bookRepository;
-    this.authorService = authorService;
-    this.genreService = genreService;
-  }
+    @Autowired
+    BookServiceImpl(BookRepository bookRepository, GenreServiceImpl genreService, AuthorServiceImpl authorService) {
+        this.bookRepository = bookRepository;
+        this.authorService = authorService;
+        this.genreService = genreService;
+    }
 
-  @Override
-  public BookEntity addNewBook(BookDto requestedBook) {
-    BookEntity bookToCreate = prepareBookTooCreate(requestedBook);
-    if (theBookAlreadyExist(bookToCreate)) throw new BusinessException(BusinessExceptionCode.B_01);
-    return bookRepository.save(bookToCreate);
-  }
+    @Override
+    public BookEntity addNewBook(BookDto requestedBook) {
+        BookEntity bookToCreate = prepareBookTooCreate(requestedBook);
+        if (theBookAlreadyExist(bookToCreate)) throw new BusinessException(BusinessExceptionCode.B_01);
+        return bookRepository.save(bookToCreate);
+    }
 
-  @Override
-  public List<BookEntity> findPaged(BookPageSortRequest request) {
-    Pageable paged = PageRequest.of(request.page(), request.numberOfElements());
-    return bookRepository.findAll(paged).stream().collect(Collectors.toList());
-  }
+    @Override
+    public List<BookEntity> findPaged(BookPageSortRequest request) {
+        Pageable paged = PageRequest.of(request.page(), request.numberOfElements());
+        return bookRepository.findAll(paged).stream().collect(Collectors.toList());
+    }
 
-  private BookEntity prepareBookTooCreate(BookDto requestedBook) {
-    GenreEntity genreEntity = genreService.findGenreByNameOrCreateNew(requestedBook.getGenre());
-    AuthorEntity authorEntity =
-        authorService.findAuthorByNameOrCreateNew(requestedBook.getAuthor());
+    private BookEntity prepareBookTooCreate(BookDto requestedBook) {
+        GenreEntity genreEntity = genreService.findGenreByNameOrCreateNew(requestedBook.getGenre());
+        AuthorEntity authorEntity = authorService.findAuthorByNameOrCreateNew(requestedBook.getAuthor());
 
-    return BookEntity.builder()
-        .title(requestedBook.getTitle())
-        .author(authorEntity)
-        .genre(genreEntity)
-        .build();
-  }
+        return BookEntity.builder()
+                .title(requestedBook.getTitle())
+                .author(authorEntity)
+                .genre(genreEntity)
+                .build();
+    }
 
-  private Boolean theBookAlreadyExist(BookEntity bookToCheck) {
-    return bookRepository
-        .findByTitleAndGenreIdAndAuthorId(
-            bookToCheck.getTitle(), bookToCheck.getGenre().getId(), bookToCheck.getAuthor().getId())
-        .isPresent();
-  }
+    private Boolean theBookAlreadyExist(BookEntity bookToCheck) {
+        return bookRepository
+                .findByTitleAndGenreIdAndAuthorId(
+                        bookToCheck.getTitle(),
+                        bookToCheck.getGenre().getId(),
+                        bookToCheck.getAuthor().getId())
+                .isPresent();
+    }
 }

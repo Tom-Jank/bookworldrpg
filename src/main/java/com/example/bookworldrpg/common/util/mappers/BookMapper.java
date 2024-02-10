@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookMapper {
-  public static BookDto toBookResponseDto(BookEntity bookEntity) {
-    return BookDto.builder()
-        .title(bookEntity.getTitle())
-        .author(bookEntity.getAuthor().getName())
-        .genre(bookEntity.getGenre().getName())
-        .build();
-  }
+    public static BookDto toBookResponseDto(BookEntity bookEntity) {
+        return BookDto.builder()
+                .title(bookEntity.getTitle())
+                .author(bookEntity.getAuthor().getName())
+                .genre(bookEntity.getGenre().getName())
+                .build();
+    }
 }

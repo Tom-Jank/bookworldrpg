@@ -4,5 +4,5 @@ import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
 
 public interface GenreService {
 
-  GenreEntity findGenreByNameOrCreateNew(String name);
+    GenreEntity findGenreByNameOrCreateNew(String name);
 }

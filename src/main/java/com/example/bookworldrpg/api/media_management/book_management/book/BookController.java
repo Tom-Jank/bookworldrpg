@@ -16,32 +16,23 @@ public class BookController {
     private final BookService bookService;
 
     @Autowired
-    BookController(
-            BookServiceImpl bookService
-    ) {
+    BookController(BookServiceImpl bookService) {
         this.bookService = bookService;
     }
 
     @GetMapping
-    ResponseEntity<List<BookDto>> getPagedBooks(
-            @RequestBody BookPageSortRequest request) {
-        List<BookDto> responseDtos =
-                bookService
-                        .findPaged(request)
-                        .stream()
-                        .map(BookMapper::toBookResponseDto)
-                        .toList();
+    ResponseEntity<List<BookDto>> getPagedBooks(@RequestBody BookPageSortRequest request) {
+        List<BookDto> responseDtos = bookService.findPaged(request).stream()
+                .map(BookMapper::toBookResponseDto)
+                .toList();
 
         return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
 
     @PostMapping
     @ResponseBody
-    ResponseEntity<BookDto> addNewBook(
-            @RequestBody BookDto bookRequest
-    ) {
-        BookDto responseDto =
-                BookMapper.toBookResponseDto(bookService.addNewBook(bookRequest));
+    ResponseEntity<BookDto> addNewBook(@RequestBody BookDto bookRequest) {
+        BookDto responseDto = BookMapper.toBookResponseDto(bookService.addNewBook(bookRequest));
 
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }

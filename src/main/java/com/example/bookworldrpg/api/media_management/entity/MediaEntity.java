@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MediaEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "TITLE")
-  private String title;
+    @Column(name = "TITLE")
+    private String title;
 
-  @JoinColumn(name = "GENRE_ID")
-  @OneToOne
-  private GenreEntity genre;
+    @JoinColumn(name = "GENRE_ID")
+    @OneToOne
+    private GenreEntity genre;
 }
