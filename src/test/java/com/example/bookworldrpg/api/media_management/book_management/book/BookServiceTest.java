@@ -2,7 +2,7 @@ package com.example.bookworldrpg.api.media_management.book_management.book;
 
 import com.example.bookworldrpg.api.media_management.book_management.author.AuthorServiceImpl;
 import com.example.bookworldrpg.api.media_management.book_management.genre.GenreServiceImpl;
-import com.example.bookworldrpg.api.media_management.dto.BookRequestDto;
+import com.example.bookworldrpg.api.media_management.dto.BookDto;
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
@@ -41,7 +41,7 @@ public class BookServiceTest {
         GenreEntity genre = GenreEntity.builder().id(1L).name("genre").build();
         AuthorEntity author = AuthorEntity.builder().id(1L).name("author").build();
         BookEntity bookEntity = BookEntity.builder().id(1L).title("book").author(author).genre(genre).build();
-        BookRequestDto requestDto = BookRequestDto.builder().title("book").author("author").genre("genre").build();
+        BookDto requestDto = BookDto.builder().title("book").author("author").genre("genre").build();
 
         when(genreService.findGenreByNameOrCreateNew(any())).thenReturn(genre);
         when(authorService.findAuthorByNameOrCreateNew(any())).thenReturn(author);
@@ -63,7 +63,7 @@ public class BookServiceTest {
         GenreEntity genre = GenreEntity.builder().id(1L).name("genre").build();
         AuthorEntity author = AuthorEntity.builder().id(1L).name("author").build();
         BookEntity bookEntity = BookEntity.builder().id(1L).title("book").author(author).genre(genre).build();
-        BookRequestDto requestDto = BookRequestDto.builder().title("book").author("author").genre("genre").build();
+        BookDto requestDto = BookDto.builder().title("book").author("author").genre("genre").build();
 
         when(genreService.findGenreByNameOrCreateNew(any())).thenReturn(genre);
         when(authorService.findAuthorByNameOrCreateNew(any())).thenReturn(author);

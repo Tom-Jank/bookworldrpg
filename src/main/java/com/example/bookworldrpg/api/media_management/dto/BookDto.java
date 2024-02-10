@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class BookRequestDto {
+public class BookDto {
 
     private final String author;
 

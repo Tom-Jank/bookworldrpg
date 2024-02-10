@@ -1,8 +1,7 @@
 package com.example.bookworldrpg.api.media_management.book_management.book;
 
 import com.example.bookworldrpg.api.media_management.dto.BookPageSortRequest;
-import com.example.bookworldrpg.api.media_management.dto.BookRequestDto;
-import com.example.bookworldrpg.api.media_management.dto.BookResponseDto;
+import com.example.bookworldrpg.api.media_management.dto.BookDto;
 import com.example.bookworldrpg.common.util.mappers.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +22,9 @@ public class BookController {
     }
 
     @GetMapping
-    ResponseEntity<List<BookResponseDto>> getPagedBooks(
+    ResponseEntity<List<BookDto>> getPagedBooks(
             @RequestBody BookPageSortRequest request) {
-        List<BookResponseDto> responseDtos =
+        List<BookDto> responseDtos =
                 bookService
                         .findPaged(request)
                         .stream()
@@ -37,10 +36,10 @@ public class BookController {
 
     @PostMapping
     @ResponseBody
-    ResponseEntity<BookResponseDto> addNewBook(
-            @RequestBody BookRequestDto bookRequest
+    ResponseEntity<BookDto> addNewBook(
+            @RequestBody BookDto bookRequest
     ) {
-        BookResponseDto responseDto =
+        BookDto responseDto =
                 BookMapper.toBookResponseDto(bookService.addNewBook(bookRequest));
 
         return new ResponseEntity<>(responseDto, HttpStatus.OK);

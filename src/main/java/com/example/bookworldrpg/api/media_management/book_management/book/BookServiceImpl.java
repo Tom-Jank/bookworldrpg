@@ -5,7 +5,7 @@ import com.example.bookworldrpg.api.media_management.book_management.author.Auth
 import com.example.bookworldrpg.api.media_management.book_management.genre.GenreService;
 import com.example.bookworldrpg.api.media_management.book_management.genre.GenreServiceImpl;
 import com.example.bookworldrpg.api.media_management.dto.BookPageSortRequest;
-import com.example.bookworldrpg.api.media_management.dto.BookRequestDto;
+import com.example.bookworldrpg.api.media_management.dto.BookDto;
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.GenreEntity;
@@ -38,7 +38,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookEntity addNewBook(BookRequestDto requestedBook) {
+    public BookEntity addNewBook(BookDto requestedBook) {
         BookEntity bookToCreate = prepareBookTooCreate(requestedBook);
         if ( theBookAlreadyExist(bookToCreate) ) throw new BusinessException(BusinessExceptionCode.B_01);
         return bookRepository.save(bookToCreate);
@@ -50,7 +50,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll(paged).stream().collect(Collectors.toList());
     }
 
-    private BookEntity prepareBookTooCreate(BookRequestDto requestedBook) {
+    private BookEntity prepareBookTooCreate(BookDto requestedBook) {
         GenreEntity genreEntity = genreService.findGenreByNameOrCreateNew(requestedBook.getGenre());
         AuthorEntity authorEntity = authorService.findAuthorByNameOrCreateNew(requestedBook.getAuthor());
 
