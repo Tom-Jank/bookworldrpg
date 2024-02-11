@@ -9,6 +9,9 @@ import lombok.Getter;
 @IdClass(UserBookLibraryId.class)
 @Getter
 public class UserBookLibrary {
-    @Id Long userId;
-    @Id Long bookId;
+    @Id
+    Long userId;
+
+    @Id
+    Long bookId;
 }

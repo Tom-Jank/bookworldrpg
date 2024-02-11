@@ -21,5 +21,4 @@ public class MediaEntity {
     @JoinColumn(name = "GENRE_ID")
     @OneToOne
     private GenreEntity genre;
-
 }

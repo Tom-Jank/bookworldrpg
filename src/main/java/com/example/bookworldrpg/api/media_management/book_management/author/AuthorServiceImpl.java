@@ -6,19 +6,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
-
     private final AuthorRepository authorRepository;
 
     @Autowired
-    AuthorServiceImpl(
-            AuthorRepository authorRepository
-    ) {
+    AuthorServiceImpl(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
 
     @Override
     public AuthorEntity findAuthorByNameOrCreateNew(String name) {
-        return authorRepository.findAuthorByName(name)
-                .orElseGet(() -> authorRepository.save(AuthorEntity.builder().name(name).build()));
+        return authorRepository
+                .findAuthorByName(name)
+                .orElseGet(() ->
+                        authorRepository.save(AuthorEntity.builder().name(name).build()));
     }
 }

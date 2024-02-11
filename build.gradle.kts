@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.2.2"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("com.diffplug.spotless") version "6.25.0"
 }
 
 group = "com.example"
@@ -11,9 +12,14 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_17
 }
 
-configurations {
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
+spotless {
+	java {
+		palantirJavaFormat()
+		configurations {
+			compileOnly {
+				extendsFrom(configurations.annotationProcessor.get())
+			}
+		}
 	}
 }
 

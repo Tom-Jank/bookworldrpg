@@ -21,5 +21,4 @@ public class UserProfileEntity {
 
     @Column(name = "USER_LEVEL")
     private Long level;
-
 }

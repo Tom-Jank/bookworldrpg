@@ -19,5 +19,4 @@ public class GenreEntity {
 
     @Column(name = "NAME")
     private String name;
-
 }

@@ -10,16 +10,15 @@ public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
 
     @Autowired
-    GenreServiceImpl(
-            GenreRepository genreRepository
-    ) {
+    GenreServiceImpl(GenreRepository genreRepository) {
         this.genreRepository = genreRepository;
     }
 
     @Override
     public GenreEntity findGenreByNameOrCreateNew(String name) {
-        return this.genreRepository.findGenreByName(name)
-                .orElseGet(() -> genreRepository.save(GenreEntity.builder().name(name).build()));
-
+        return this.genreRepository
+                .findGenreByName(name)
+                .orElseGet(() ->
+                        genreRepository.save(GenreEntity.builder().name(name).build()));
     }
 }

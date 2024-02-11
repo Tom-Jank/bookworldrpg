@@ -1,15 +1,14 @@
 package com.example.bookworldrpg.api.media_management.book_management.author;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.example.bookworldrpg.api.media_management.entity.AuthorEntity;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 public class AuthorRepositoryTest {
@@ -18,10 +17,7 @@ public class AuthorRepositoryTest {
     private final TestEntityManager testEntityManager;
 
     @Autowired
-    AuthorRepositoryTest(
-            AuthorRepository authorRepository,
-            TestEntityManager testEntityManager
-    ) {
+    AuthorRepositoryTest(AuthorRepository authorRepository, TestEntityManager testEntityManager) {
         this.authorRepository = authorRepository;
         this.testEntityManager = testEntityManager;
     }

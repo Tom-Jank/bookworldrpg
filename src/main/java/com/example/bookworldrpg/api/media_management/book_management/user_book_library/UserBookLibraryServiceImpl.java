@@ -3,9 +3,8 @@ package com.example.bookworldrpg.api.media_management.book_management.user_book_
 import com.example.bookworldrpg.api.media_management.book_management.book.BookRepository;
 import com.example.bookworldrpg.api.media_management.entity.BookEntity;
 import com.example.bookworldrpg.api.media_management.entity.UserBookLibrary;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserBookLibraryServiceImpl implements UserBookLibraryService {
@@ -20,7 +19,9 @@ public class UserBookLibraryServiceImpl implements UserBookLibraryService {
 
     @Override
     public List<BookEntity> findBooksFromUserLibrary(Long userId) {
-        List<Long> bookIds = userBookLibraryRepository.findAllByUserId(userId).stream().map(UserBookLibrary::getBookId).toList();
+        List<Long> bookIds = userBookLibraryRepository.findAllByUserId(userId).stream()
+                .map(UserBookLibrary::getBookId)
+                .toList();
 
         return bookRepository.findByIdIn(bookIds);
     }
