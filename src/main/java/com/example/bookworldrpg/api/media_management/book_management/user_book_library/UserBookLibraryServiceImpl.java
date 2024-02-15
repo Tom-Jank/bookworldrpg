@@ -17,6 +17,7 @@ public class UserBookLibraryServiceImpl implements UserBookLibraryService {
         this.bookRepository = bookRepository;
     }
 
+    // todo think about moving this method to bookservice
     @Override
     public List<BookEntity> findBooksFromUserLibrary(Long userId) {
         List<Long> bookIds = userBookLibraryRepository.findAllByUserId(userId).stream()
